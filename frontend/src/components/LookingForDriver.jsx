@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LookingForDrivr = () => {
+const LookingForDriver = (props) => {
   return (
     <div>
        <h5 className='p-1 text-center w-[93%] absolute top-0' onClick={() => {
@@ -43,4 +43,4 @@ const LookingForDrivr = () => {
   )
 }
 
-export default LookingForDrivr
+export default LookingForDriver

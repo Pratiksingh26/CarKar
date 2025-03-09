@@ -146,7 +146,7 @@ const Home = () => {
         </div>
 
         <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 bg-white translate-y-full px-3 py-10 pt-12'>
-          <LookingForDriver setVehicleFound = {setVehicleFound} />
+          <LookingForDriver vehicleFound={vehicleFound} setVehicleFound = {setVehicleFound} />
         </div>
 
         <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0 bg-white  px-3 py-10 pt-12'>
