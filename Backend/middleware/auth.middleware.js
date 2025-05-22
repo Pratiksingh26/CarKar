@@ -7,13 +7,13 @@ const captainModel = require("../models/captain.model");
 module.exports.userAuth = async(req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1] || req.cookies.token;
     if(!token){
-        res.status(401).json({message: "unauthorized"})
+       return res.status(401).json({message: "unauthorized"})
     }
 
     const isBlacklisted = await blacklistTokenModel.findOne({token : token});
 
     if(isBlacklisted){
-        res.status(401).json({message: unauthorized})
+       return res.status(401).json({message: unauthorized})
     }
 
     try{
@@ -32,7 +32,7 @@ module.exports.authCaptain = async(req,res,next) => {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
     if(!token){
-         res.status(401).json({message: "unauthorized"})
+        return res.status(401).json({message: "unauthorized"})
     }
 
     const isBlacklisted = await blacklistTokenModel.findOne({token: token})
@@ -40,7 +40,7 @@ module.exports.authCaptain = async(req,res,next) => {
     // console.log(isBlacklisted)
 
     if(isBlacklisted){
-        res.status(401).json({message:"unauthorized"})
+       return res.status(401).json({message:"unauthorized"})
     }
 
     try {
@@ -53,7 +53,7 @@ module.exports.authCaptain = async(req,res,next) => {
     } catch (err) {
         console.log(err);
 
-        res.status(401).json({ message: 'Unauthorized' });
+       return res.status(401).json({ message: 'Unauthorized' });
     }
 }
 
