@@ -15,5 +15,11 @@ router.get("/get-coordinates",
          mapController.getDistanceAndTime
      )
 
+     router.get("/get-suggestions",
+          query("input").isString().isLength({ min:3 }),
+          authMiddleware.userAuth,
+          mapController.getAutoCompleteSuggestions
+     )
+
 
 module.exports = router;

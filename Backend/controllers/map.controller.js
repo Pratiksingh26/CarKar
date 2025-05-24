@@ -14,10 +14,10 @@ module.exports.getCoordinates = async (req, res) => {
 
     try{
         const coordinates = await mapService.getAddressCoordinate(address);
-        res.status(200).json(coordinates)
+         return res.status(200).json(coordinates)
     }
     catch(error){
-        res.status(404).json({ message: error.message || "Coordinate not found."}) 
+        return res.status(404).json({ message: error.message || "Coordinate not found."}) 
     }
 }
 
@@ -39,5 +39,24 @@ module.exports.getDistanceAndTime = async (req, res, next) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+module.exports.getAutoCompleteSuggestions = async (req, res, next) => {
+   try{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { input } = req.query;
+
+    const suggestions = await mapService.getAutoCompleteSuggestions(input);
+
+    res.status(200).json(suggestions)
+   }
+    catch(error){
+        console.error(error.message)
+         return res.status(404).json({ message: error.message || "Suggestions not found."})
     }
 }
